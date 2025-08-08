@@ -12,6 +12,25 @@ dotnet build ./TicTacToe.Tests/TicTacToe.Tests.csproj
 # Tests will fail until you complete the prompts below
 ```
 
+
+## Before You Prompt: Explore the Project
+Spend 5–10 minutes getting the lay of the land.
+
+1. Build and attempt tests / run:
+   ```bash
+   dotnet build ./TicTacToe.Core/TicTacToe.Core.csproj
+   dotnet build ./TicTacToe.Cli/TicTacToe.Cli.csproj
+   dotnet build ./TicTacToe.Tests/TicTacToe.Tests.csproj
+   dotnet test  ./TicTacToe.Tests/TicTacToe.Tests.csproj       # failing at first is expected
+   dotnet run   --project ./TicTacToe.Cli/TicTacToe.Cli.csproj # will likely fail when hitting NotImplemented
+   ```
+
+2. Use **Cursor** to orient yourself:
+   - Ask Cursor for a **high‑level architecture summary** of `Board`, `GameStatus`, `IBotStrategy`, and `HeuristicBot`.
+   - Request a **diagram or bullet flow** of a typical turn: human move → validate → status check → bot move.
+   - Have Cursor **enumerate each `// PROMPT:`** in order and restate what you’ll need to implement.
+
+
 ## Using Cursor
 Follow the **Prompt Roadmap** below. Implement the engine first, then the bot, then wire up the CLI.
 
@@ -37,3 +56,12 @@ dotnet run   --project ./TicTacToe.Cli/TicTacToe.Cli.csproj
 - Heuristic bot plays legal moves (win/block/center/corners/edges)
 - CLI renders board and handles invalid input without crashing
 - (Stretch) Extract a `GameLoop` class and add undo/redo
+
+## Closing: Ideate Enhancements with Cursor
+When your acceptance criteria are green, take 5–10 minutes to brainstorm **stretch features**.
+
+Use one or more of these prompts in Cursor:
+- *“Suggest 10 practical feature improvements for this project, grouped by effort (S/M/L). Explain the user benefit of each.”*
+- *“Identify weak spots in the current design and propose refactors that improve testability or clarity.”*
+- *“Pick one Small feature and draft a task checklist with acceptance tests. Then implement it.”*
+- *“Write a short README ‘What I’d Do Next’ section summarizing potential upgrades.”*
