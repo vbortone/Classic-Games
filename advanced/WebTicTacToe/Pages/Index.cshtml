@@ -1,0 +1,20 @@
+@page
+@model WebTicTacToe.Pages.IndexModel
+@{
+    ViewData["Title"] = "Web Tic-Tac-Toe";
+}
+
+<h1 class="title">Web Tic-Tac-Toe (Razor Pages, Minimax)</h1>
+
+<!-- PROMPT: Ask Cursor to render a 3x3 grid as a form with buttons.
+     Each button posts back with row/col. Disable occupied squares.
+     Show current player / status / scoreboard, and actions for New Game, Rematch. -->
+
+<div class="board">
+    <!-- TODO: Students render board here with Cursor -->
+</div>
+
+<form method="post">
+    <button type="submit" formaction="?handler=NewGame">New Game</button>
+    <button type="submit" formaction="?handler=Rematch">Rematch</button>
+</form>

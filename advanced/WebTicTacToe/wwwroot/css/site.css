@@ -1,0 +1,3 @@
+.title { font-family: system-ui, sans-serif; }
+.board { margin-top: 1rem; }
+.board button { width: 80px; height: 80px; font-size: 1.5rem; }
