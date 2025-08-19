@@ -72,16 +72,78 @@ public class HeuristicBot : IBotStrategy
         
         foreach (var (r, c) in emptyCells)
         {
-            // Create a temporary move to test if it would result in a win
-            var testMove = new Move(r, c, player);
-            var testBoard = board.Apply(testMove);
-            
-            if (testBoard.GetStatus() == (player == Cell.X ? GameStatus.XWins : GameStatus.OWins))
+            // Simulate the move without using board.Apply to avoid player validation
+            if (WouldResultInWin(board, r, c, player))
             {
                 return (r, c);
             }
         }
         
         return null;
+    }
+    
+    private bool WouldResultInWin(Board board, int row, int col, Cell player)
+    {
+        // Check if placing 'player' at (row, col) would result in a win
+        
+        // Check row
+        bool rowWin = true;
+        for (int c = 0; c < 3; c++)
+        {
+            var cell = c == col ? player : board[row, c];
+            if (cell != player)
+            {
+                rowWin = false;
+                break;
+            }
+        }
+        if (rowWin) return true;
+        
+        // Check column
+        bool colWin = true;
+        for (int r = 0; r < 3; r++)
+        {
+            var cell = r == row ? player : board[r, col];
+            if (cell != player)
+            {
+                colWin = false;
+                break;
+            }
+        }
+        if (colWin) return true;
+        
+        // Check main diagonal (if the move is on the diagonal)
+        if (row == col)
+        {
+            bool diagWin = true;
+            for (int i = 0; i < 3; i++)
+            {
+                var cell = i == row ? player : board[i, i];
+                if (cell != player)
+                {
+                    diagWin = false;
+                    break;
+                }
+            }
+            if (diagWin) return true;
+        }
+        
+        // Check anti-diagonal (if the move is on the anti-diagonal)
+        if (row + col == 2)
+        {
+            bool antiDiagWin = true;
+            for (int i = 0; i < 3; i++)
+            {
+                var cell = i == row ? player : board[i, 2 - i];
+                if (cell != player)
+                {
+                    antiDiagWin = false;
+                    break;
+                }
+            }
+            if (antiDiagWin) return true;
+        }
+        
+        return false;
     }
 }
