@@ -23,6 +23,35 @@ while (true)
 
 static void Render(Board b)
 {
-    // TODO: Students implement with Cursor.
-    throw new NotImplementedException();
+    Console.WriteLine("    1   2   3");
+    Console.WriteLine("  ┌───┬───┬───┐");
+    
+    for (int row = 0; row < 3; row++)
+    {
+        Console.Write($" {row + 1} │");
+        
+        for (int col = 0; col < 3; col++)
+        {
+            var cell = b[row, col];
+            var symbol = cell switch
+            {
+                Cell.Empty => " ",
+                Cell.X => "X",
+                Cell.O => "O",
+                _ => " "
+            };
+            
+            Console.Write($" {symbol} │");
+        }
+        
+        Console.WriteLine();
+        
+        if (row < 2)
+        {
+            Console.WriteLine("  ├───┼───┼───┤");
+        }
+    }
+    
+    Console.WriteLine("  └───┴───┴───┘");
+    Console.WriteLine();
 }
