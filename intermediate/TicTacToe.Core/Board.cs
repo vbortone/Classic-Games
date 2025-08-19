@@ -55,7 +55,60 @@ public class Board
     // PROMPT: Ask Cursor to implement GetStatus() that checks rows, cols, diags, and draw.
     public GameStatus GetStatus()
     {
-        throw new NotImplementedException();
+        // Check rows for win
+        for (int r = 0; r < 3; r++)
+        {
+            if (_cells[r, 0] != Cell.Empty && 
+                _cells[r, 0] == _cells[r, 1] && 
+                _cells[r, 1] == _cells[r, 2])
+            {
+                return _cells[r, 0] == Cell.X ? GameStatus.XWins : GameStatus.OWins;
+            }
+        }
+
+        // Check columns for win
+        for (int c = 0; c < 3; c++)
+        {
+            if (_cells[0, c] != Cell.Empty && 
+                _cells[0, c] == _cells[1, c] && 
+                _cells[1, c] == _cells[2, c])
+            {
+                return _cells[0, c] == Cell.X ? GameStatus.XWins : GameStatus.OWins;
+            }
+        }
+
+        // Check main diagonal (top-left to bottom-right)
+        if (_cells[0, 0] != Cell.Empty && 
+            _cells[0, 0] == _cells[1, 1] && 
+            _cells[1, 1] == _cells[2, 2])
+        {
+            return _cells[0, 0] == Cell.X ? GameStatus.XWins : GameStatus.OWins;
+        }
+
+        // Check anti-diagonal (top-right to bottom-left)
+        if (_cells[0, 2] != Cell.Empty && 
+            _cells[0, 2] == _cells[1, 1] && 
+            _cells[1, 1] == _cells[2, 0])
+        {
+            return _cells[0, 2] == Cell.X ? GameStatus.XWins : GameStatus.OWins;
+        }
+
+        // Check for draw (all cells filled)
+        bool isDraw = true;
+        for (int r = 0; r < 3; r++)
+        {
+            for (int c = 0; c < 3; c++)
+            {
+                if (_cells[r, c] == Cell.Empty)
+                {
+                    isDraw = false;
+                    break;
+                }
+            }
+            if (!isDraw) break;
+        }
+
+        return isDraw ? GameStatus.Draw : GameStatus.InProgress;
     }
 
     // PROMPT: Ask Cursor to implement GetEmptyCells() helper returning IEnumerable<(int r,int c)>.
