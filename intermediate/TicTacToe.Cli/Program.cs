@@ -154,7 +154,7 @@ public class GameLoop
         
         for (int row = 0; row < 3; row++)
         {
-            Console.Write($" {row + 1} │");
+            Console.Write($"{row + 1} │");
             
             for (int col = 0; col < 3; col++)
             {
